@@ -1,0 +1,9 @@
+@back Location3
+You: And here's Bard's shop. All we have to do is find and steal the chip.
+You: That's great! I've got the chip, I've got to get back to Sara and Lion in Burossa.
+@set quest="Back to Sara and Lion in Burossa"
+@set gameProgress++
+@wait 1
+@hide Dialogue
+@goto Map
+@stop

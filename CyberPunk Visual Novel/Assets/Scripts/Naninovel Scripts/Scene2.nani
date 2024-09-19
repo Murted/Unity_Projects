@@ -1,0 +1,46 @@
+@back Location2
+@goto .FirstTimeHere if:gameProgress==1
+@goto .ComeWithTheChip if:gameProgress==3
+@goto .ComeToHappyLion if:gameProgress==4&&lionHappy
+@goto .ComeToSadLion if:gameProgress==4&&!lionHappy
+@goto .ComeWithoutTheChip if:gameProgress!=1
+
+#FirstTimeHere
+@char Lion.Default
+Lion.Default: Hello, {name}. Good to see you!
+You: Hey there!
+You: Sara said you are trying to get a chip that can be used to inject a virus into a network.
+Lion.Default: Yes, but first of all, do you want to play a small game?
+You: Let's go!
+@loadScene MemoryGame
+Continue
+Lion.Default: You did it great!
+Lion.Default: And as for the chip, it's in Urmand in a small shop at Bard's. He won't sell it, so we have to sneak it from him. Can you do that?
+You: Sure!
+Lion.Default: That's great! Then head to Urmand and get the chip, while I head to Sara so we can think about our next move. Good luck! 
+@set quest="Steal the Chip in Urmand"
+@set gameProgress++
+@goto Map
+
+#ComeWithoutTheChip
+@char Lion.Default
+Lion.Default: Did you steal the chip?
+You: Still no.
+Lion.Default: What are you waiting for then?
+@goto Map
+
+#ComeWithTheChip
+You: There is no Lion here. He is probably already with Sara in Burossa.
+@goto Map
+
+#ComeToHappyLion
+@char Lion.Default
+Lion.Default: Welcome back!
+Lion.Default: Glad you gave me the chip. Now we can do something interesting with the Lockrers.
+@goto Map
+
+#ComeToSadLion
+@char Lion.Default
+Lion.Default: What are you doing here? To apologise?
+Lion.Default: You won't get it!
+@goto Map
