@@ -1,0 +1,4 @@
+@back GameTitle time:0
+@input name summary:"Enter your name:"
+@stop
+@goto Scene1

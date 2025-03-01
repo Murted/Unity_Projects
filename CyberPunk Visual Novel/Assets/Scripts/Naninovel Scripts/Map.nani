@@ -1,0 +1,8 @@
+@hideAll
+@back GameTitle
+@choice handler:ButtonArea button:Map/Burossa pos:0,300 goto:Scene1
+@choice handler:ButtonArea button:Map/Lebron pos:0,0 goto:Scene2 if:gameProgress!=0
+@choice handler:ButtonArea button:Map/DisabledLebron pos:0,0 goto:Scene2 if:gameProgress==0
+@choice handler:ButtonArea button:Map/Urmand pos:0,-300 goto:Scene3 if:gameProgress==2
+@choice handler:ButtonArea button:Map/DisabledUrmand pos:0,-300 goto:Scene3 if:gameProgress!=2
+@stop

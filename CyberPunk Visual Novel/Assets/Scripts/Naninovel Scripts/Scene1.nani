@@ -1,0 +1,81 @@
+@back Location1
+
+@goto .FirstTimeHere if:gameProgress==0
+@goto .ComeWithTheChip if:gameProgress==3
+@goto .ComeToHappySara if:gameProgress==4&&saraHappy
+@goto .ComeToSadSara if:gameProgress==4&&!saraHappy
+@goto .ComeWithoutTheChip if:gameProgress!=0
+
+#FirstTimeHere
+@char Sara.Default
+Sara: Hey there, {name}. Long time no see you in Burossa!
+You: Hey!
+Sara.Default: Glad to see you here. Lion and I are trying to get a chip that can be used to inject a virus into a network and gain access to classified information.
+Sara.Default: Can you help us?
+You: Yes, sure.
+Sara.Default: Great! You need to meet Lion, he'll explain more about where to get that chip. Lion is in Lebron right now.
+@ShowUI QuestUI
+@set quest="Talk to Lion in Lebron"
+@set gameProgress++
+You: All right, then I'll go to him.
+Sara.Default: See ya!
+@goto Map
+
+#ComeWithoutTheChip
+@char Sara.Default
+Sara.Default: Did you get the chip?
+You: Still no.
+Sara.Default: I believe you can do it!
+@goto Map
+
+#ComeWithTheChip
+@set gameProgress++
+@hideUI QuestUI
+@char Sara.Default
+@char Lion.Default
+Sara.Default: You are finally back! Did everything go smoothly?
+You: Yes, here is the chip.
+Lion.Default: Good! Now we can use the chip to hack into the Lorker system.
+Sara.Default: But I thought we weren't going to antagonise them, we have the Roopers who get in our way every time, we need to get even with them.
+Lion.Default: They're nobodies and I don't want to waste my time on them, so {name}, give me the chip and we'll launch a great network attack.
+Sara.Default: {name}, don't listen to him, give me the chip and we can get even with our enemies.
+@choice "Give the chip to Sara" goto:.SaraHappyEnd
+@choice "Give the chip to Lion" goto:.LionHappyEnd
+@choice "Keep the chip" goto:.NooneHappy
+@stop
+
+#SaraHappyEnd
+Sara.Default: Thanks, I knew I could count on you.
+Lion.Default: Why did you do it? Don't you realise what we can do?
+You: I don't think starting a war with the Lorkers is a good idea, and I've wanted to get even with the Roopers for a long time.
+Lion.Default: I knew I couldn't trust anyone.
+@set saraHappy=true
+@goto Map
+
+#LionHappyEnd
+Lion.Default: Well done! Now we'll know all the Lorkers' plans and we can blackmail them!
+Sara.Default: {name}, why did you do that? We're going to make another enemy.
+You: I think we can use the Lorkers to make a good future for us.
+Sara.Default: I didn't think you'd be so cruel!
+@set lionHappy=true
+@goto Map
+
+#NooneHappy
+Sara.Default: Why are you keeping it?
+You: I don't want to start any more wars or take revenge on anyone, I'll get rid of it so no one gets hurt.
+Lion.Default: Are you crazy?
+You: I've already made my intentions clear.
+@goto Map
+
+#ComeToHappySara
+@char Sara.Default
+Sara.Default: Happy to see you again!
+Sara.Default: Thanks for giving me the chip. Now we can get revenge on the Roopers!
+@goto Map
+
+#ComeToSadSara
+@char Sara.Default
+Sara.Default: And why did you come back?
+Sara.Default: You think we can get things back to the way they were?
+Sara.Default: No way!
+@goto Map
