@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private Character inputActions;
     private SpriteRenderer sprite;
     private Rigidbody2D rb;
+    private Animator animator;
     private BoxCollider2D playerCollider;
     private Vector2 moveInput;
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable()
@@ -87,6 +89,17 @@ public class PlayerController : MonoBehaviour
         {
             sprite.flipX = false;
         }
+
+        UpdateAnimations();
+    }
+
+    private void UpdateAnimations()
+    {
+        animator.SetFloat("speed", Mathf.Abs(moveX));
+
+        animator.SetFloat("jumpSpeed", moveY);
+
+        animator.SetBool("IsGrounded", isGrounded);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
