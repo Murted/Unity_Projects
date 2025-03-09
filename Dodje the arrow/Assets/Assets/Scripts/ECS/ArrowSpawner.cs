@@ -66,4 +66,19 @@ public class ArrowSpawner : MonoBehaviour
         arrowPool.Add(newArrow);
         return newArrow;
     }
+
+    public void ResetSpawner()
+    {
+        foreach (var arrow in arrowPool)
+        {
+            arrow.SetActive(false);
+        }
+
+        currentSpeed = 3f;
+
+        CancelInvoke(nameof(SpawnArrow));
+        InvokeRepeating(nameof(SpawnArrow), 1f, spawnRate);
+
+        Debug.Log("ArrowSpawner has been reset");
+    }
 }

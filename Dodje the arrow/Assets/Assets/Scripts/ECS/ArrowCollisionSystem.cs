@@ -15,13 +15,21 @@ public class ArrowCollisionSystem : IEcsRunSystem
 
             if (!arrow.IsActive) continue;
 
+            if (!arrowTransform.Value.gameObject.activeInHierarchy)
+            {
+                arrow.IsActive = false;
+                continue;
+            }
+
             if (PlayerController.Instance == null) return;
 
             Vector2 playerPosition = PlayerController.Instance.transform.position;
 
-            if (Vector2.Distance(arrowTransform.Value.position, playerPosition) < 1.2f)
+            if (Vector2.Distance(arrowTransform.Value.position, playerPosition) < 1.2f && !GameManager.Instance.IsGameOver)
             {
+                GameManager.Instance.IsGameOver = true;
                 GameManager.Instance.GameOver();
+                Debug.Log("qwe");
             }
         }
     }
