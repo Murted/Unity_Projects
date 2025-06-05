@@ -29,7 +29,6 @@ public class ArrowCollisionSystem : IEcsRunSystem
             {
                 GameManager.Instance.IsGameOver = true;
                 GameManager.Instance.GameOver();
-                Debug.Log("qwe");
             }
         }
     }

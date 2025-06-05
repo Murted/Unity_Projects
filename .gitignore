@@ -6,6 +6,10 @@
 [Ll]ogs/
 [Uu]ser[Ss]ettings/
 
+# Игнорировать библиотеку YandexGame
+[Yy]andexGame/
+[Ww]eb[Gg][Ll][Tt]emplates
+
 # Игнорировать файлы проекта и решения
 *.csproj
 *.unityproj

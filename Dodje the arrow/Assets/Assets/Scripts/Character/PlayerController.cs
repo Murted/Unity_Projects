@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
         moveX = moveInput.x * speed;
         moveY = rb.linearVelocity.y;
 
+
         isGrounded = IsGrounded();
 
         float clampedX = Mathf.Clamp(transform.position.x + moveX * Time.fixedDeltaTime, xMin, xMax);
@@ -171,6 +172,14 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), true);
         yield return new WaitForSeconds(collisionDisableTime);
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
+    }
+
+    public void ResetSpeed()
+    {
+        moveX = 0f;
+        moveY = 0f;
+        rb.linearVelocity = Vector2.zero;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Platform"), false);
     }
 }

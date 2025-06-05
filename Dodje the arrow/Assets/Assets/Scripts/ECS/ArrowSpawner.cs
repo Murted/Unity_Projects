@@ -9,10 +9,10 @@ public class ArrowSpawner : MonoBehaviour
     public Transform[] rightSpawnPoints;
 
     private List<GameObject> arrowPool = new List<GameObject>();
-    private float spawnRate = 2f;
+    private float spawnRate = 0.7f;
     private float speedIncrease = 1f;
-    private float maxSpeed = 5f;
-    private float currentSpeed = 3f;
+    private float maxSpeed = 8f;
+    private float currentSpeed = 5f;
     private EcsWorld _world;
 
     private void Start()
@@ -78,7 +78,16 @@ public class ArrowSpawner : MonoBehaviour
 
         CancelInvoke(nameof(SpawnArrow));
         InvokeRepeating(nameof(SpawnArrow), 1f, spawnRate);
+    }
 
-        Debug.Log("ArrowSpawner has been reset");
+    public void ResetSecondChance()
+    {
+        foreach (var arrow in arrowPool)
+        {
+            arrow.SetActive(false);
+        }
+
+        CancelInvoke(nameof(SpawnArrow));
+        InvokeRepeating(nameof(SpawnArrow), 1f, spawnRate);
     }
 }
